@@ -6,7 +6,7 @@ FactoryBot.define do
     association :author, factory: :manager
 #    assignee_id { 1 }
     association :assignee, factory: :developer
-    state { "MyString" }
+    state { "archived" }
     expired_at { "2022-07-20" }
   end
 end
