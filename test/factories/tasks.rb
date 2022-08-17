@@ -3,7 +3,7 @@ FactoryBot.define do
     name
     description
     association :author, factory: :manager
-    association :assignee, factory: :developer 
+    association :assignee, factory: :developer
     state
     expired_at
   end
