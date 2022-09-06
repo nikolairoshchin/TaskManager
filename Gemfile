@@ -30,6 +30,7 @@ gem 'ransack', :github => 'activerecord-hackery/ransack', :branch => 'main'
 gem 'responders'
 gem 'active_model_serializers'
 
+gem 'webpacker-react', "~> 1.0.0.beta.1"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
