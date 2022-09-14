@@ -2,6 +2,11 @@ require 'test_helper'
 
 class Api::V1::TasksControllerTest < ActionController::TestCase
 
+  setup do
+    user = create(:user)
+    sign_in user
+  end
+
   test "should get show" do
     author = create :user
     task = create :task, author: author
