@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
   actions: {
     display: 'flex',
     justifyContent: 'flex-end',
- },
+  },
 }));
 
 export default useStyles;

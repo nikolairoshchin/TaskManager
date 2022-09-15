@@ -13,11 +13,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import { flexbox } from '@material-ui/system';
 
 import useStyles from './useStyles';
 
-const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate }) => {
+function EditPopup({ cardId, onClose, onDestroyCard, onLoadCard, onUpdateCard }) {
   const [task, setTask] = useState(null);
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
@@ -30,7 +29,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
   const handleCardUpdate = () => {
     setSaving(true);
 
-    onCardUpdate(task).catch((error) => {
+    onUpdateCard(task).catch((error) => {
       setSaving(false);
       setErrors(error || {});
 
@@ -43,7 +42,7 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
   const handleCardDestroy = () => {
     setSaving(true);
 
-    onCardDestroy(task).catch((error) => {
+    onDestroyCard(task).catch((error) => {
       setSaving(false);
 
       alert(`Destrucion Failed! Error: ${error.message}`);
@@ -68,8 +67,8 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
               <CircularProgress />
             </div>
           ) : (
-              <Form errors={errors} onChange={setTask} task={task} />
-            )}
+            <Form errors={errors} onChange={setTask} task={task} />
+          )}
         </CardContent>
         <CardActions className={styles.actions}>
           <Button
@@ -94,10 +93,14 @@ const EditPopup = ({ cardId, onClose, onCardDestroy, onLoadCard, onCardUpdate })
       </Card>
     </Modal>
   );
-};
+}
 
 EditPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
+  cardId: PropTypes.number.isRequired,
+  onDestroyCard: PropTypes.func.isRequired,
+  onLoadCard: PropTypes.func.isRequired,
+  onUpdateCard: PropTypes.func.isRequired,
 };
 
 export default EditPopup;

@@ -50,7 +50,7 @@ function TaskBoard() {
     loadColumn(state, page, perPage).then(({ data }) => {
       setBoardCards((prevState) => ({
         ...prevState,
-        [state]: { cards: prevState[state]["cards"].concat(data.items),  meta: data.meta }
+        [state]: { cards: [...prevState[state].cards, ...data.items], meta: data.meta },
       }));
     });
   };
@@ -81,8 +81,6 @@ function TaskBoard() {
     STATES.map(({ key }) => loadColumnInitial(key));
   };
 
-  // Tasks Drugging
-
   const handleCardDragEnd = (task, source, destination) => {
     const transition = task.transitions.find(({ to }) => destination.toColumnId === to);
     if (!transition) {
@@ -98,10 +96,6 @@ function TaskBoard() {
         alert(`Move failed! ${error.message}`);
       });
   };
-
-  // -----------
-
-  // New Task Add
 
   const MODES = {
     ADD: 'add',
@@ -122,18 +116,12 @@ function TaskBoard() {
   const handleTaskCreate = (params) => {
     const attributes = TaskForm.attributesToSubmit(params);
     return TasksRepository.create(attributes).then(({ data: { task } }) => {
-      loadColumnInitial(task.state); //  … loading column with task.state
-      handleClose();                //  … close popup
+      loadColumnInitial(task.state);
+      handleClose();
     });
   };
 
-  // -----------
-
-  // Cards Edit
-
-  const loadTask = (id) => {
-  return TasksRepository.show(id).then(({ data: { task } }) => task);
-  };
+  const loadTask = (id) => TasksRepository.show(id).then(({ data: { task } }) => task);
 
   const handleTaskUpdate = (task) => {
     const attributes = TaskForm.attributesToSubmit(task);
@@ -144,24 +132,16 @@ function TaskBoard() {
     });
   };
 
-  const handleTaskDestroy = (task) => {
-    return TasksRepository.destroy(task.id).then(() => {
+  const handleTaskDestroy = (task) =>
+    TasksRepository.destroy(task.id).then(() => {
       loadColumnInitial(task.state);
       handleClose();
     });
-  };
 
-  const handleOpenEditPopup = task => {
+  const handleOpenEditPopup = (task) => {
     setOpenedTaskId(task.id);
     setMode(MODES.EDIT);
   };
-
-  const handleEditClose = () => {
-    setMode(MODES.NONE);
-    changeOpenedTask(null);
-  };
-// -------------
-
 
   useEffect(() => loadBoard(), []);
   useEffect(() => generateBoard(), [boardCards]);
@@ -182,9 +162,9 @@ function TaskBoard() {
       {mode === MODES.EDIT && (
         <EditPopup
           onLoadCard={loadTask}
-          onCardDestroy={handleTaskDestroy}
-          onCardUpdate={handleTaskUpdate}
-          onClose={handleEditClose}
+          onDestroyCard={handleTaskDestroy}
+          onUpdateCard={handleTaskUpdate}
+          onClose={handleClose}
           cardId={openedTaskId}
         />
       )}

@@ -22,7 +22,7 @@ function Task({ onClick, task }) {
 
   return (
     <Card className={styles.root}>
-    <CardHeader action={action} title={task.name} />
+      <CardHeader action={action} title={task.name} />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           {task.description}
