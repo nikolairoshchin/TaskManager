@@ -1,9 +1,13 @@
+import React from 'react';
 import { propEq } from 'ramda';
 import { createSlice } from '@reduxjs/toolkit';
 import TasksRepository from 'repositories/TasksRepository';
 import { STATES } from 'presenters/TaskPresenter';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeColumn } from '@asseinfo/react-kanban';
+import TaskForm from 'forms/TaskForm';
+
+import useViewMode from 'hooks/store/useViewMode';
 
 const initialState = {
   board: {
@@ -37,7 +41,16 @@ const { loadColumnSuccess } = tasksSlice.actions;
 
 export const useTasksActions = () => {
   const dispatch = useDispatch();
-  const prevState = useSelector(state => state.TasksSlice.board);
+  const prevState = useSelector((state) => state.TasksSlice.board);
+  
+  const {
+    mode,
+    MODES,
+    handleOpenAddPopup,
+    handleOpenEditPopup,
+    handleClose,
+    openedTaskId,
+  } = useViewMode();
 
   const getColumn = (state, page, perPage) =>
     TasksRepository.index({
@@ -54,17 +67,69 @@ export const useTasksActions = () => {
 
   const loadColumnMore = (state, page = 1, perPage = 10) => {
     getColumn(state, page, perPage).then(({ data }) => {
-    const column = prevState.columns.find(propEq('id', state));
+      const column = prevState.columns.find(propEq('id', state));
       dispatch(loadColumnSuccess({ items: [...column.cards, ...data.items], meta: data.meta, columnId: state }));
     });
   };
 
+  const handleTaskCreate = (params) => {
+    const attributes = TaskForm.attributesToSubmit(params);
+    return TasksRepository.create(attributes).then(({ data: { task } }) => {
+      loadColumn(task.state);
+      handleClose();
+    });
+  };
+
+  const handleCardDragEnd = (task, source, destination) => {
+    const transition = task.transitions.find(({ to }) => destination.toColumnId === to);
+    if (!transition) {
+      return null;
+    }
+
+    return TasksRepository.update(task.id, { stateEvent: transition.event })
+      .then(() => {
+        loadColumn(destination.toColumnId);
+        loadColumn(source.fromColumnId);
+      })
+      .catch((error) => {
+        alert(`Move failed! ${error.message}`);
+      });
+  };
+
+  const handleTaskLoad = (id) => TasksRepository.show(id).then(({ data: { task } }) => task);
+
+  const handleTaskUpdate = (task) => {
+    const attributes = TaskForm.attributesToSubmit(task);
+
+    return TasksRepository.update(task.id, attributes).then(() => {
+      loadColumn(task.state);
+      handleClose();
+    });
+  };
+
+  const handleTaskDestroy = (task) =>
+    TasksRepository.destroy(task.id).then(() => {
+      loadColumn(task.state);
+      handleClose();
+    });
+
   const loadBoard = () => STATES.map(({ key }) => loadColumn(key));
 
   return {
+    mode,
+    MODES,
+    handleOpenAddPopup,
+    handleOpenEditPopup,
+    handleClose,
+    openedTaskId,
     loadBoard,
     loadColumn,
     loadColumnMore,
+    handleTaskCreate,
+    handleCardDragEnd,
+    handleTaskLoad,
+    handleTaskUpdate,
+    handleTaskDestroy,
   };
 };
 

@@ -8,7 +8,9 @@ import MUITheme from 'MUITheme/MUITheme';
 function App() {
   return (
     <Provider store={store}>
+     <MUITheme>
       <TaskBoard />
+     </MUITheme>
     </Provider>
   );
 }
