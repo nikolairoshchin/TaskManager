@@ -1,13 +1,11 @@
 import React from 'react';
 import { propEq } from 'ramda';
 import { createSlice } from '@reduxjs/toolkit';
-import TasksRepository from 'repositories/TasksRepository';
-import { STATES } from 'presenters/TaskPresenter';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeColumn } from '@asseinfo/react-kanban';
+import TasksRepository from 'repositories/TasksRepository';
+import { STATES } from 'presenters/TaskPresenter';
 import TaskForm from 'forms/TaskForm';
-
-import useViewMode from 'hooks/store/useViewMode';
 
 const initialState = {
   board: {
@@ -43,15 +41,6 @@ export const useTasksActions = () => {
   const dispatch = useDispatch();
   const prevState = useSelector((state) => state.TasksSlice.board);
   
-  const {
-    mode,
-    MODES,
-    handleOpenAddPopup,
-    handleOpenEditPopup,
-    handleClose,
-    openedTaskId,
-  } = useViewMode();
-
   const getColumn = (state, page, perPage) =>
     TasksRepository.index({
       q: { stateEq: state },
@@ -76,7 +65,6 @@ export const useTasksActions = () => {
     const attributes = TaskForm.attributesToSubmit(params);
     return TasksRepository.create(attributes).then(({ data: { task } }) => {
       loadColumn(task.state);
-      handleClose();
     });
   };
 
@@ -103,25 +91,17 @@ export const useTasksActions = () => {
 
     return TasksRepository.update(task.id, attributes).then(() => {
       loadColumn(task.state);
-      handleClose();
     });
   };
 
   const handleTaskDestroy = (task) =>
     TasksRepository.destroy(task.id).then(() => {
       loadColumn(task.state);
-      handleClose();
     });
 
   const loadBoard = () => STATES.map(({ key }) => loadColumn(key));
 
   return {
-    mode,
-    MODES,
-    handleOpenAddPopup,
-    handleOpenEditPopup,
-    handleClose,
-    openedTaskId,
     loadBoard,
     loadColumn,
     loadColumnMore,

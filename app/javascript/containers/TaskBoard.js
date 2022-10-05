@@ -13,18 +13,20 @@ import useTasks from 'hooks/store/useTasks';
 
 import useStyles from './useStyles';
 
+const MODES = {
+   ADD: 'add',
+   EDIT: 'edit',
+   NONE: 'none',
+ };
+
 function TaskBoard() {
+
+  const [mode, setMode] = useState(MODES.NONE);
+  const [openedTaskId, setOpenedTaskId] = useState(null);
   const {
-    mode,
-    MODES,
-    handleOpenAddPopup,
-    handleOpenEditPopup,
-    handleClose,
-    openedTaskId,
     board,
     loadBoard,
     loadColumnMore,
-    handleCloseProx,
     handleTaskCreate,
     handleCardDragEnd,
     handleTaskLoad,
@@ -37,6 +39,35 @@ function TaskBoard() {
   useEffect(() => {
     loadBoard();
   }, []);
+
+  const handleOpenAddPopup = () => {
+    setMode(MODES.ADD);
+  };
+
+  const handleOpenEditPopup = (task) => {
+    setOpenedTaskId(task.id);
+    setMode(MODES.EDIT);
+  };
+
+  const handleClose = () => {
+    setMode(MODES.NONE);
+    setOpenedTaskId(null);
+  };
+
+  const taskCreate = (params) => {
+    handleTaskCreate(params);
+    handleClose();
+  };
+
+  const taskUpdate = (task) => {
+    handleTaskUpdate(task);
+    handleClose();
+  };
+
+  const taskDestroy = (task) => {
+    handleTaskDestroy(task);
+    handleClose();
+  };
 
   return (
     <>
@@ -53,12 +84,12 @@ function TaskBoard() {
         {board}
       </Board>
 
-      {mode === MODES.ADD && <AddPopup onCreateCard={handleTaskCreate} onClose={handleClose} />}
+      {mode === MODES.ADD && <AddPopup onCreateCard={taskCreate} onClose={handleClose} />}
       {mode === MODES.EDIT && (
         <EditPopup
           onLoadCard={handleTaskLoad}
-          onDestroyCard={handleTaskDestroy}
-          onUpdateCard={handleTaskUpdate}
+          onDestroyCard={taskDestroy}
+          onUpdateCard={taskUpdate}
           onClose={handleClose}
           cardId={openedTaskId}
         />

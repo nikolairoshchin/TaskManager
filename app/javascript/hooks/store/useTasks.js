@@ -6,12 +6,6 @@ const useTasks = () => {
   const board = useSelector((state) => state.TasksSlice.board);
   
   const {
-    mode,
-    MODES,
-    handleOpenAddPopup,
-    handleOpenEditPopup,
-    handleClose,
-    openedTaskId,
     loadColumn,
     loadColumnMore,
     handleTaskCreate,
@@ -24,12 +18,6 @@ const useTasks = () => {
   const loadBoard = () => Promise.all(STATES.map(({ key }) => loadColumn(key)));
 
   return {
-    mode,
-    MODES,
-    handleOpenAddPopup,
-    handleOpenEditPopup,
-    handleClose,
-    openedTaskId,
     board,
     loadBoard,
     loadColumnMore,
