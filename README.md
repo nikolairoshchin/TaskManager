@@ -1,5 +1,7 @@
 # README
 
+<a href="https://actions-badge.atrox.dev/nikolairoshchin/TaskManager/goto?ref=develop"><img alt="Build Status" src="https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fnikolairoshchin%2FTaskManager%2Fbadge%3Fref%3Ddevelop&style=flat" /></a>
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
