@@ -9,6 +9,7 @@ services:
       - db
     environment:
       - COVERAGE
+      - COVERAGE_LCOV
       - RAILS_ENV
       - DATABASE_HOST=db
       - DATABASE_USERNAME=postgres
