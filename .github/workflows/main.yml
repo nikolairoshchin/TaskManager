@@ -17,11 +17,10 @@ jobs:
         env:
           COVERAGE: true
           RAILS_ENV: test
-          COVERAGE_LCOV: true
         run: docker-compose --file docker-compose.ci.yml run ci
 
-      - name: Coveralls
-        uses: coverallsapp/github-action@master
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@1.1.3
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: "coverage/lcov.info"
+
