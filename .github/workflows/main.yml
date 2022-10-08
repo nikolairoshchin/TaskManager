@@ -22,6 +22,8 @@ jobs:
 
       - name: Output
         run: echo $COVERAGE_DEBUG
+
+      - name: File print
         run: cat ${{ github.workspace }}/coverage/lcov.info
 
       - name: Coveralls GitHub Action
