@@ -11,7 +11,7 @@ SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
   SimpleCov::Formatter::LcovFormatter
 ])
 
-SimpleCov.start
+SimpleCov.start 'rails'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
