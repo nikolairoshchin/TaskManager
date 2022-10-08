@@ -17,7 +17,7 @@ jobs:
         env:
           COVERAGE: true
           RAILS_ENV: test
-          COVERALLS_NOISY=true
+          COVERALLS_NOISY: true
         run: docker-compose --file docker-compose.ci.yml run ci
 
       - name: Coveralls GitHub Action
