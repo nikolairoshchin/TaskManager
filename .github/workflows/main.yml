@@ -21,7 +21,7 @@ jobs:
         run: docker-compose --file docker-compose.ci.yml run ci
 
       - name: Output
-        run: ls -R
+        run: find / -name "lcov.info"
 
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@1.1.3
