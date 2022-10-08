@@ -21,10 +21,7 @@ jobs:
         run: docker-compose --file docker-compose.ci.yml run ci
 
       - name: Output
-        run: echo $COVERAGE_DEBUG
-
-      - name: File print
-        run: cat ${{ github.workspace }}/coverage/lcov.info
+        run: ls -R
 
       - name: Coveralls GitHub Action
         uses: coverallsapp/github-action@1.1.3
