@@ -1,17 +1,11 @@
 require 'simplecov'
-require 'simplecov-lcov'
+require 'coveralls'
 
-SimpleCov::Formatter::LcovFormatter.config do |config|
-  config.report_with_single_file = true
-  config.single_report_path = 'coverage/lcov.info'
-end
-
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([
-  SimpleCov::Formatter::HTMLFormatter, 
-  SimpleCov::Formatter::LcovFormatter
-])
-
-SimpleCov.start 'rails'
+SimpleCov.formatters = [
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'

@@ -19,13 +19,3 @@ jobs:
           COVERAGE_DEBUG: true
           RAILS_ENV: test
         run: docker-compose --file docker-compose.ci.yml run ci
-
-      - name: Output
-        run: find /home/runner/work/TaskManager/TaskManager/ -name "lcov.info"
-
-      - name: Coveralls GitHub Action
-        uses: coverallsapp/github-action@1.1.3
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: ${{ github.workspace }}/coverage/lcov.info
-          
