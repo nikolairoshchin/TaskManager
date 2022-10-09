@@ -16,6 +16,6 @@ jobs:
       - name: Run tests
         env:
           COVERAGE: true
-          COVERAGE_DEBUG: true
+          CI: true
           RAILS_ENV: test
         run: docker-compose --file docker-compose.ci.yml run ci
