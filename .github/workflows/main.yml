@@ -12,18 +12,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v2
       - name: Run tests
-        uses: actions/checkout@v2
         env:
           COVERAGE: true
           CI: true
           COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
           RAILS_ENV: test
         run: docker-compose --file docker-compose.ci.yml run ci
-
-      - name: Deploy app
-        uses: actions/checkout@v2
-        uses: superfly/flyctl-actions/setup-flyctl@master
-        env:
-          FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-        run: flyctl deploy --remote-only
