@@ -1,6 +1,8 @@
 name: Run tests
 runs:
   using: "composite"
+  image: 'Dockerfile'
   steps:
     - run: docker-compose --file docker-compose.ci.yml run ci
       shell: bash
+      
