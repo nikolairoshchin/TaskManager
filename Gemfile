@@ -34,6 +34,10 @@ gem 'webpacker-react', "~> 1.0.0.beta.1"
 
 gem 'js-routes'
 
+gem 'simplecov', require: false, group: :test
+gem 'simplecov-lcov', require: false
+gem 'coveralls_reborn', '~> 0.25.0', require: false
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
