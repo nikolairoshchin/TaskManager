@@ -4,6 +4,8 @@
 
 <a href='https://coveralls.io/github/nikolairoshchin/TaskManager?branch=develop'><img src='https://coveralls.io/repos/github/nikolairoshchin/TaskManager/badge.svg?branch=develop' alt='Coverage Status' /></a>
 
+https://dry-bush-121.fly.dev/
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

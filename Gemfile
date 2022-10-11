@@ -38,6 +38,7 @@ gem 'simplecov', require: false, group: :test
 gem 'simplecov-lcov', require: false
 gem 'coveralls_reborn', '~> 0.25.0', require: false
 
+gem 'bullet'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
