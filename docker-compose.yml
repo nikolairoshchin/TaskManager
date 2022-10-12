@@ -20,6 +20,7 @@ services:
       GEM_PATH: /bundle_cache
       RAILS_PORT: 3000
       RUBYOPT: -W:no-deprecated -W:no-experimental
+      ROLLBAR_ACCESS_TOKEN: POST_SERVER_ITEM_ACCESS_TOKEN
       DATABASE_HOST: db
       DATABASE_USERNAME: postgres
       DATABASE_PASSWORD: postgres
