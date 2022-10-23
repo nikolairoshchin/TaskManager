@@ -35,7 +35,8 @@
 
      main#main.mdl-layout__content
        - flash.each do |type, msg| 
-         = msg
+         .flash-style
+           = msg
        .page-content
          = yield
      footer#footer.mdl-mini-footer
