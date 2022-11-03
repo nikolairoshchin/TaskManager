@@ -24,9 +24,9 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   def password_reset
-    @user = User.first
-    @reset_token = @user.reset_digest
-    params = { user: @user, reset_token: @reset_token }
+    user = User.first
+    reset_token = user.reset_digest
+    params = { user: user, reset_token: reset_token }
 
     UserMailer.with(params).password_reset
   end

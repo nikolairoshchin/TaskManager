@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_18_082615) do
+ActiveRecord::Schema.define(version: 2022_10_31_193721) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2022_10_18_082615) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "reset_digest"
-    t.datetime "reset_sent_time"
+    t.datetime "reset_expires_at"
   end
 
 end

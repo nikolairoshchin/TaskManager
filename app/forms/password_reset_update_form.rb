@@ -1,5 +1,4 @@
 class PasswordResetUpdateForm < User
-#  include ActiveModel::Model
 
   attr_accessor(
     :password,
