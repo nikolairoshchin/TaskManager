@@ -51,12 +51,6 @@ class Web::PasswordResetsControllerTest < ActionController::TestCase
     assert_redirected_to new_password_reset_url
   end
 
-  test "password do not match confirmation" do
-    patch :update, params: { id: @user.reset_digest, password_reset_update_form: { password: '123', password_confirmation: '1' }}
-    assert_equal "password and password confirmation are different", flash[:alert]
-    assert_response :success
-  end
-
   test "correct password" do
     patch :update, params: { id: @user.reset_digest, password_reset_update_form: { password: '123', password_confirmation: '123' }}
     assert_equal "Password has been reset.", flash[:notice]
