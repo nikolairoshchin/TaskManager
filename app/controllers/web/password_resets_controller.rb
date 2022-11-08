@@ -13,7 +13,7 @@ class Web::PasswordResetsController < Web::ApplicationController
 
     user = @password_reset.user
     password_reset_token_update(user)
-    UserMailer.with({ user: user }).password_reset.deliver_later
+    SendPasswordResetNotificationJob.perform_async(user.id)
     flash[:notice] = "Email sent to your e-mail address"
     redirect_to root_url
   end
