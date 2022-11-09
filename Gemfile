@@ -44,9 +44,10 @@ gem 'rollbar'
 gem 'newrelic_rpm'
 gem 'newrelic-infinite_tracing'
 
-gem 'sidekiq', '~>6.5.0'
+gem 'sidekiq', '~> 6.5.8'
 gem 'sidekiq-failures'
 gem 'sidekiq-throttled'
+gem 'sidekiq-unique-jobs'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
