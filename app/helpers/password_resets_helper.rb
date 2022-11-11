@@ -9,10 +9,9 @@ module PasswordResetsHelper
 
   def get_user
     @user = User.find_by(reset_digest: params[:id])
-    unless @user
+    return @user if @user.present?
       flash[:alert] = "user not found"
       redirect_to root_url
-    end
   end
 
   def check_expiration

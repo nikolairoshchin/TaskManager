@@ -14,6 +14,7 @@ end
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'
+require 'sidekiq/testing'
 
 class ActiveSupport::TestCase
   include ActionMailer::TestHelper
@@ -26,4 +27,5 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
   include FactoryBot::Syntax::Methods
   include AuthHelper
+  Sidekiq::Testing.inline!
 end
