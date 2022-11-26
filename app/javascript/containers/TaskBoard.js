@@ -14,13 +14,12 @@ import useTasks from 'hooks/store/useTasks';
 import useStyles from './useStyles';
 
 const MODES = {
-   ADD: 'add',
-   EDIT: 'edit',
-   NONE: 'none',
- };
+  ADD: 'add',
+  EDIT: 'edit',
+  NONE: 'none',
+};
 
 function TaskBoard() {
-
   const [mode, setMode] = useState(MODES.NONE);
   const [openedTaskId, setOpenedTaskId] = useState(null);
   const {
@@ -79,7 +78,7 @@ function TaskBoard() {
         disableColumnDrag
         onCardDragEnd={handleCardDragEnd}
         renderCard={(card) => <Task onClick={handleOpenEditPopup} task={card} />}
-        renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore}/>}
+        renderColumnHeader={(column) => <ColumnHeader column={column} onLoadMore={loadColumnMore} />}
       >
         {board}
       </Board>

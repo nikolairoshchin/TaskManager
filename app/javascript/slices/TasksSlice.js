@@ -40,7 +40,7 @@ const { loadColumnSuccess } = tasksSlice.actions;
 export const useTasksActions = () => {
   const dispatch = useDispatch();
   const prevState = useSelector((state) => state.TasksSlice.board);
-  
+
   const getColumn = (state, page, perPage) =>
     TasksRepository.index({
       q: { stateEq: state },

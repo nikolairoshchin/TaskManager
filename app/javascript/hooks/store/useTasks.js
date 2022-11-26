@@ -4,7 +4,7 @@ import { STATES } from 'presenters/TaskPresenter';
 
 const useTasks = () => {
   const board = useSelector((state) => state.TasksSlice.board);
-  
+
   const {
     loadColumn,
     loadColumnMore,

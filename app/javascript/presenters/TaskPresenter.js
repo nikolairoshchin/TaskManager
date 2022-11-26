@@ -19,4 +19,5 @@ export default new PropTypesPresenter({
   assignee: PropTypes.integer,
   state: PropTypes.string,
   expired_at: PropTypes.date,
+  imageUrl: PropTypes.string,
 });
