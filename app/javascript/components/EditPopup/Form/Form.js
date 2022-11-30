@@ -8,19 +8,18 @@ import Button from '@material-ui/core/Button';
 import UserSelect from 'components/UserSelect';
 import TaskPresenter from 'presenters/TaskPresenter';
 import ImageUpload from 'components/ImageUpload';
-import TasksRepository from 'repositories/TasksRepository';
 
 import useStyles from './useStyles';
 
-function Form({ errors, onChange, task }) {
+function Form({ errors, onChange, attachImage, removeImage, task }) {
   const handleChangeTextField = (fieldName) => (event) => onChange({ ...task, [fieldName]: event.target.value });
   const handleChangeSelect = (fieldName) => (user) => onChange({ ...task, [fieldName]: user });
   const styles = useStyles();
   const onAttachImage = (attachment) => {
-    TasksRepository.attach_image(task.id, attachment);
+    attachImage(task.id, attachment);
   };
   const onRemoveImage = () => {
-    TasksRepository.remove_image(task.id);
+    removeImage(task.id);
   };
 
   return (

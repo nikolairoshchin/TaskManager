@@ -27,11 +27,11 @@ function ImageUpload({ onUpload }) {
     changeCropParams(newPercentageCrop);
   };
 
-  const onImageLoad = (e) => {
-    const { naturalWidth: width, naturalHeight: height } = e.currentTarget;
+  const onImageLoad = (event) => {
+    const { naturalWidth: width, naturalHeight: height } = event.currentTarget;
     const newCropParams = makeAspectCrop(DEFAULT_CROP_PARAMS, width, height);
     changeCropParams(newCropParams);
-    changeImage(e.currentTarget);
+    changeImage(event.currentTarget);
   };
 
   const getActualCropParameters = (width, height, params) => ({
@@ -55,10 +55,10 @@ function ImageUpload({ onUpload }) {
     changeFileAsBase64(path(['target', 'result'], newImage));
   };
 
-  const handleLoadFile = (e) => {
-    e.preventDefault();
+  const handleLoadFile = (event) => {
+    event.preventDefault();
 
-    const [acceptedFile] = e.target.files;
+    const [acceptedFile] = event.target.files;
 
     const fileReader = new FileReader();
     fileReader.onload = handleImageRead;

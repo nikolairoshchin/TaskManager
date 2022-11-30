@@ -31,6 +31,8 @@ function TaskBoard() {
     handleTaskLoad,
     handleTaskUpdate,
     handleTaskDestroy,
+    imageAttach,
+    imageRemove,
   } = useTasks();
 
   const styles = useStyles();
@@ -91,6 +93,8 @@ function TaskBoard() {
           onUpdateCard={taskUpdate}
           onClose={handleClose}
           cardId={openedTaskId}
+          onAttachImage={imageAttach}
+          onRemoveImage={imageRemove}
         />
       )}
     </>

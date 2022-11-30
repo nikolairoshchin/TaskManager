@@ -101,6 +101,15 @@ export const useTasksActions = () => {
 
   const loadBoard = () => STATES.map(({ key }) => loadColumn(key));
 
+  const imageAttach = (task_id, attachment) => {
+    TasksRepository.attachImage(task_id, attachment);
+  };
+
+  const imageRemove = (task_id) => {
+    TasksRepository.removeImage(task_id);
+  };
+
+
   return {
     loadBoard,
     loadColumn,
@@ -110,6 +119,8 @@ export const useTasksActions = () => {
     handleTaskLoad,
     handleTaskUpdate,
     handleTaskDestroy,
+    imageAttach,
+    imageRemove,
   };
 };
 

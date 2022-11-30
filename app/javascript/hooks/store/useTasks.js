@@ -13,6 +13,8 @@ const useTasks = () => {
     handleTaskLoad,
     handleTaskUpdate,
     handleTaskDestroy,
+    imageAttach,
+    imageRemove,
   } = useTasksActions();
 
   const loadBoard = () => Promise.all(STATES.map(({ key }) => loadColumn(key)));
@@ -26,6 +28,8 @@ const useTasks = () => {
     handleTaskLoad,
     handleTaskUpdate,
     handleTaskDestroy,
+    imageAttach,
+    imageRemove,
   };
 };
 
