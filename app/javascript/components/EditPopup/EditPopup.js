@@ -16,7 +16,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 import useStyles from './useStyles';
 
-function EditPopup({ cardId, onClose, onDestroyCard, onLoadCard, onUpdateCard }) {
+function EditPopup({ cardId, onClose, onDestroyCard, onLoadCard, onUpdateCard, onAttachImage, onRemoveImage }) {
   const [task, setTask] = useState(null);
   const [isSaving, setSaving] = useState(false);
   const [errors, setErrors] = useState({});
@@ -67,7 +67,7 @@ function EditPopup({ cardId, onClose, onDestroyCard, onLoadCard, onUpdateCard })
               <CircularProgress />
             </div>
           ) : (
-            <Form errors={errors} onChange={setTask} task={task} />
+            <Form errors={errors} onChange={setTask} attachImage={onAttachImage} removeImage={onRemoveImage} task={task} />
           )}
         </CardContent>
         <CardActions className={styles.actions}>

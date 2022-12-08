@@ -9,8 +9,8 @@ const theme = createTheme({
   },
 });
 
-function MUITheme({children}) {
+function MUITheme({ children }) {
   return <ThemeProvider theme={theme}> {children} </ThemeProvider>;
-};
+}
 
 export default MUITheme;

@@ -40,7 +40,7 @@ const { loadColumnSuccess } = tasksSlice.actions;
 export const useTasksActions = () => {
   const dispatch = useDispatch();
   const prevState = useSelector((state) => state.TasksSlice.board);
-  
+
   const getColumn = (state, page, perPage) =>
     TasksRepository.index({
       q: { stateEq: state },
@@ -101,6 +101,15 @@ export const useTasksActions = () => {
 
   const loadBoard = () => STATES.map(({ key }) => loadColumn(key));
 
+  const imageAttach = (task_id, attachment) => {
+    TasksRepository.attachImage(task_id, attachment);
+  };
+
+  const imageRemove = (task_id) => {
+    TasksRepository.removeImage(task_id);
+  };
+
+
   return {
     loadBoard,
     loadColumn,
@@ -110,6 +119,8 @@ export const useTasksActions = () => {
     handleTaskLoad,
     handleTaskUpdate,
     handleTaskDestroy,
+    imageAttach,
+    imageRemove,
   };
 };
 

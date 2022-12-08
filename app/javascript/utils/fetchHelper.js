@@ -1,5 +1,6 @@
 import axios from 'axios';
 import qs from 'qs';
+import { serialize } from 'object-to-formdata';
 
 import { camelize, decamelize } from './keysConverter';
 
@@ -61,5 +62,25 @@ export default {
     const body = decamelize(json);
 
     return axios.delete(url, body).then(camelize);
+  },
+
+  putFormData(url, json) {
+    const image = json.attachment.image;
+    const body = decamelize(json.attachment);
+    const object = { attachment: { ...body, image: image }};
+    const formData = serialize(
+      object,
+    );
+    return axios
+      .put(url, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      })
+      .then(camelize);
+  },
+
+  putRemoveImage(url) {
+    return axios.put(url).then(camelize);
   },
 };
